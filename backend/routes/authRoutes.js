@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const router = express.Router();
 
-// **Signup Route**
 router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -26,7 +25,6 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// **Login Route**
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -42,7 +40,6 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
-    // Generate JWT Token
     const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
